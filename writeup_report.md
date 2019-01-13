@@ -117,3 +117,90 @@ After several iterations and tuning, the car was able to drive autonomously. Her
 
 [![Self Driving Car - Behavioral Cloning](https://i.ytimg.com/vi/HNsagL1y0-k/hqdefault.jpg)](https://www.youtube.com/watch?v=HNsagL1y0-k&feature=youtu.be)
 
+#### Miscellaneous
+* In order to ease overriding values for different parameters, I have defined the properties (such as epochs, keep prob, output folder path etc.) as switches so that they can be provided at runtime. For help, you can run the command `python model.py -h`. The default values are provided. So, one can just execute `python model.py` to generate a model with default setup.
+ 
+```
+$ python model.py -h
+usage: model.py [-h] [--data-dir DATA_DIR] [--test-size TEST_SIZE]
+                [--keep-prob KEEP_PROB] [--epochs EPOCHS]
+                [--batch-size BATCH_SIZE] [--correction CORRECTION]
+                [--output-folder OUTPUT_FOLDER]
+                [--summary-filename SUMMARY_FILENAME]
+
+Deep learning model generator based on input data
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --data-dir DATA_DIR   Data directory path (default: data)
+  --test-size TEST_SIZE
+                        Test size (default: 0.2)
+  --keep-prob KEEP_PROB
+                        Drop out probability (default: 0.25)
+  --epochs EPOCHS       Number of epochs (default: 7)
+  --batch-size BATCH_SIZE
+                        Batch size (default: 32)
+  --correction CORRECTION
+                        Correction of left/right steering angle (default:
+                        0.25)
+  --output-folder OUTPUT_FOLDER
+                        Name of the output folder (default: output)
+  --summary-filename SUMMARY_FILENAME
+                        Name of the summary file (default: SUMMARY)
+```
+* The outputs are generated inside the designated folder of the `outputs/` folder. Say, you run the model as `python model.py --output-folder=exec1`, it will create an output folder at `outputs/exec1`, and writes the files `SUMMARY`, `VERSIONS`, `model.h5` inside it.
+* I trained the model on my local computer and GPU, and had several problems related to version compatibility. So I have created a script `versions.sh` that lists the versions of various applications and packages as a file. This is executed by default when model.py is executed so that it's easier to know the versions of all the applications/packages used to generate that particular model. Here's how the content of `VERSION` file looks like:
+
+```
+## Application and module versions
+
+
+#### Processor:
+AMD Ryzen Threadripper 2950X 16-Core Processor
+
+#### Linux version:
+Ubuntu 16.04.5 LTS
+
+#### GPU name:
+GeForce RTX 2080 Ti
+
+#### GPU driver version:
+410.79
+
+#### Cuda version:
+Cuda compilation tools, release 9.0, V9.0.176
+
+#### cuDNN version:
+7.1.4
+
+#### Tensorflow version:
+1.12.0
+
+#### Tensorflow Keras (tf.keras) version:
+2.1.6-tf
+
+#### Keras version:
+2.2.4
+
+#### Python version:
+3.6.6
+
+#### pip version:
+18.1
+
+#### GCC version:
+4.8.5
+
+#### Numpy version:
+1.15.4
+
+#### Pandas version:
+0.23.4
+
+#### Matplotlib version:
+3.0.0
+
+#### cv2 version:
+3.4.3
+```
+
